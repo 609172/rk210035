@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become_user: root
+  become: yes
+  vars:
+    pkgname: unzip
+  tasks:
+  - name: Test Pkg module
+    package_facts:
+      manager: auto
+    register: task_result
+  - debug:
+      msg:"{{task_result[{{pkgname}}"]}} is installed"
+# when: pkgname in task_result

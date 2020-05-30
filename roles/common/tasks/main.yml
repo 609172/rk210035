@@ -1,0 +1,7 @@
+----
+  - include_tasks: copy.yml
+  - include_tasks: recordtime.yml
+  - include_tasks: useradd.yml
+  - include_tasks: manageservice.yml
+  - include_tasks: reboot.yml
+  

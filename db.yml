@@ -1,0 +1,6 @@
+---
+  - name: Database playbook
+    hosts: localhost
+    roles:
+      - dbconfig
+      

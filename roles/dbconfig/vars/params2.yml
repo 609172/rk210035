@@ -1,0 +1,16 @@
+---
+awsakey: AKIAIFM55VJXNAYL556A
+awsskey: sxTpUfa2iG4m8wU5Im9UT0lXlZ3bnZtYwpmAWk8/
+awsregion: us-east-1
+parmgrp: snowdbgroup
+gropdesction: DB group from Snow parameters
+dbengine: mariadb
+dbver: 10.1
+dbinstanceclass: db.t2.medium
+dbname: AFBOP
+dbid: Testtd
+mupassword: Welcome123
+muname: madmin
+dbregion: us-east-1
+storage: 10
+

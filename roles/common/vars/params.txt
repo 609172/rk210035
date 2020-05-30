@@ -1,0 +1,2 @@
+src_path: /home/ansadmin/snow/roles/appserver/files/chrony.conf
+dest_path: /home/ansadmin/snow

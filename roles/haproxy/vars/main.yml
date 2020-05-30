@@ -1,0 +1,27 @@
+---
+  src_path: files/chrony.conf
+  dest_path: /etc
+  username: haproxy
+  Service_name: chronyd
+  Service_st: started
+  enabled_st: yes
+  pkgs:
+    - haproxy
+  listenstport: 8080
+  pidfileloc: 
+  userha: haproxy
+  groupha: haproxy
+  maxconnha: 4000
+  apserver1ip:
+  apserver2ip:
+  snowport0: 16000
+  snowport1: 16001
+  snowport2: 16002
+  snowport3: 16003
+  snowport4: 16004
+  snowport5: 16005
+  snowport6: 16006
+  localinf: /var/log
+  localinffile: haproxy.log
+  localnotdir: /var/log
+  localnotfile: haproxy-status.log

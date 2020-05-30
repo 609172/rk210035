@@ -1,0 +1,5 @@
+---
+ - name: For copying files
+   copy:
+     src:  "{{src_path}}"
+     dest: "{{dest_path}}"

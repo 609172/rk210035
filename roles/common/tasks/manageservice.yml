@@ -1,0 +1,6 @@
+---
+ - name: Manage service
+   service:
+      name: "{{Service_name}}"
+      enabled: "{{enabled_st}}"
+      state: "{{Service_st}}"

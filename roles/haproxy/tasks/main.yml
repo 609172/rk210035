@@ -1,0 +1,15 @@
+---
+  - name: HA Proxy installation
+    include_role:
+        name: common
+        tasks_from: "{{item}}"
+    loop:
+      - recordtime
+      - copy
+      - manageservice
+      - updatesystem
+      - installpkgs
+      - useradd
+      - reboot
+  - debug:
+      msg: REboot Status is {{rebootstatus.rebooted}}

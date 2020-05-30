@@ -1,0 +1,11 @@
+----
+- hosts: ec2-52-86-127-184.compute-1.amazonaws.com
+  tasks:
+  - name: Reboot server
+    reboot:
+      reboot_timeout: 60
+      pre_reboot_delay: 60
+      msg: Reboot started
+    register: reboot_status
+  - debug:
+     var: reboot_status

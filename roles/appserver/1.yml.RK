@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  become_user: root
+  become: yes
+  vars:
+    pkgname: unzip
+  tasks:
+  - name: Check packages
+    yum:
+      list: unzip
+    register: resultout
+  - set_fact:
+       status1: "{{resultout.results[0].yumstate}}"
+  - debug:
+       msg: "{{status1}}"

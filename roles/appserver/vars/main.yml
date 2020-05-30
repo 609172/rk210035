@@ -1,0 +1,11 @@
+---
+  src_path: "/home/ansadmin/snow/roles/appserver/files/chrony.conf"
+  dest_path: "/home/ansadmin/snow/test"
+  username: "svcnow"
+  Service_name: chronyd
+  Service_st: null
+  enabled_st: yes
+  pkgs:
+    - java-1.8.0-openjdk-devel
+    - glibc.i686 
+    - libgcc.i686

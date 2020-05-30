@@ -1,0 +1,7 @@
+---
+ - name: Adding user
+   become: yes
+   become_user: root
+   user:
+      name: "{{username}}"
+ 

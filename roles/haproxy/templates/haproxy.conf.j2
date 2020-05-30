@@ -1,0 +1,7 @@
+$ModLoad imudp
+$UDPServerRun 514
+$template Haproxy,"%msg%\n"
+local2.=info -{{localinfdir}}/{{localinffile}};Haproxy
+local2.notice -{{localnotdir}}/{{localnotfile}};Haproxy
+### keep logs in localhost ##
+local2.* ~

@@ -1,0 +1,53 @@
+
+PLAY [localhost] ***************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Check packages] **********************************************************
+ok: [localhost]
+
+TASK [debug] *******************************************************************
+ok: [localhost] => {
+    "resultout": {
+        "changed": false,
+        "failed": false,
+        "msg": "",
+        "results": [
+            {
+                "arch": "x86_64",
+                "epoch": "0",
+                "name": "unzip",
+                "nevra": "0:unzip-6.0-43.el8.x86_64",
+                "release": "43.el8",
+                "repo": "@System",
+                "version": "6.0",
+                "yumstate": "installed"
+            },
+            {
+                "arch": "x86_64",
+                "epoch": "0",
+                "name": "unzip",
+                "nevra": "0:unzip-6.0-41.el8.x86_64",
+                "release": "41.el8",
+                "repo": "rhel-8-baseos-rhui-rpms",
+                "version": "6.0",
+                "yumstate": "available"
+            },
+            {
+                "arch": "x86_64",
+                "epoch": "0",
+                "name": "unzip",
+                "nevra": "0:unzip-6.0-43.el8.x86_64",
+                "release": "43.el8",
+                "repo": "rhel-8-baseos-rhui-rpms",
+                "version": "6.0",
+                "yumstate": "available"
+            }
+        ]
+    }
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

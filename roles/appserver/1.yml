@@ -1,0 +1,14 @@
+---
+- hosts: myhosts
+  remote_user: ansadmin
+  become: yes
+  become_user: root
+  tasks:
+  - name: Reboot server
+    reboot:
+      reboot_timeout: 180
+      pre_reboot_delay: 60
+      msg: Reboot started
+    register: reboot_status
+  - debug:
+     var: reboot_status

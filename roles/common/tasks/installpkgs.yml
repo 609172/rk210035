@@ -1,0 +1,14 @@
+---
+ - name: Installing packages
+   become: yes
+   become_user: root
+   yum:
+        name: "{{item}}"
+        state: latest
+   loop:
+        "{{pkgs}}"
+   become: yes
+   register: result
+ - debug:
+      msg: Installation status {{result.stdout}}
+

@@ -1,0 +1,23 @@
+---
+  - name: record time
+    include_role:
+        name: common
+        tasks_from: recordtime
+  - debug:
+      msg: "creating parameter group"
+  - name: "Create parameter group"
+    rds_param_group:
+       name: "{{parmgrp}}"
+       aws_access_key: "{{awsakey}}"
+       aws_secret_key: "{{awsskey}}"
+       state: present
+       region: "{{awsregion}}"
+       engine: "{{dbengine}}{{dbver}}"
+       description: "{{gropdesction}}"
+       params:
+         "{{dbparams}}"
+    register: task_result
+  - name: record time
+    include_role:
+        name: common
+        tasks_from: recordtime

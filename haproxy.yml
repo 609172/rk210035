@@ -1,0 +1,8 @@
+---
+  - name: Ha proxy  playbook
+    hosts: myhosts
+    become: yes
+    become_user: root
+    roles:
+      - haproxy
+      

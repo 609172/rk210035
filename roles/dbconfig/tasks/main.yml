@@ -1,0 +1,4 @@
+---
+ - include_vars: params1.yml
+ - include_vars: params2.yml
+ - import_tasks: parm_grp.yml

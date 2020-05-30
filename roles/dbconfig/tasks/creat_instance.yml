@@ -1,0 +1,18 @@
+--- 
+- hosts: localhost 
+  name: "Provision instance"
+  tasks: 
+  -  rds_instance: 
+       allocated_storage: {{storage}}
+       aws_access_key: {{awsakey}}
+       aws_secret_key: {{awsskey}}
+       db_instance_class: {{dbinstanceclass}}
+       db_name: {{dbname}}
+       engine: {{dbengine}}
+       id: {{dbid}}
+       password: {{mupassword}}
+       username: {{muname}}
+       region: {{dbregion}}
+      when task_result.errors == []
+     
+  

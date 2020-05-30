@@ -1,0 +1,103 @@
+#---------------------------------------------------------------------
+# Example configuration for a possible web application.  See the
+# full configuration options online.
+#
+#   http://haproxy.1wt.eu/download/1.4/doc/configuration.txt
+#
+#---------------------------------------------------------------------
+
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+    # to have these messages end up in /var/log/haproxy.log you will
+    # need to:
+    #
+    # 1) configure syslog to accept network log events.  This is done
+    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
+    #    /etc/sysconfig/syslog
+    #
+    # 2) configure local2 events to go to the /var/log/haproxy.log
+    #   file. A line like the following can be added to
+    #   /etc/sysconfig/syslog
+    #
+    #    local2.*                       /var/log/haproxy.log
+    #
+    log         127.0.0.1 local2
+    chroot      /var/lib/haproxy
+    pidfile     {{pidfileloc}}/haproxy.pid
+    maxconn     {{maxconnha}}
+    user        {{userha}}
+    group       {{groupha}}
+    daemon
+    tune.ssl.default-dh-param   2048
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+#---------------------------------------------------------------------
+# main frontend which proxys to the backends
+#---------------------------------------------------------------------
+frontend  svcnow
+    mode http
+    reqadd X-Forwarded-Proto:\ https
+    default_backend sn_nodes
+
+    bind *:443 ssl crt /etc/pki/tls/certs/sn.pem
+    bind *:80
+    redirect scheme https if !{ ssl_fc }
+
+backend sn_nodes
+    mode http
+    cookie JSESSIONID prefix nocache
+
+    # Add server lines as appropriate
+    server dc0app0_00 {{apserver1ip}}:{{snowport0}} cookie dc0app0_00 check weight 100
+    server dc0app0_01 {{apserver1ip}}:{{snowport1}} cookie dc0app0_01 check weight 100
+    server dc0app0_02 {{apserver1ip}}:{{snowport2}} cookie dc0app0_02 check weight 100
+    server dc0app0_03 {{apserver1ip}}:{{snowport3}} cookie dc0app0_03 check weight 100
+    server dc0app0_04 {{apserver1ip}}:{{snowport4}} cookie dc0app0_04 check weight 100
+    server dc0app0_05 {{apserver1ip}}:{{snowport5}} cookie dc0app0_05 check weight 100
+    server dc0app0_06 {{apserver1ip}}:{{snowport6}} cookie dc0app0_06 check weight 100
+
+    server dc0app1_00 {{apserver2ip}}:{{snowport0}} cookie dc0app1_00 check weight 100
+    server dc0app1_01 {{apserver2ip}}:{{snowport1}} cookie dc0app1_01 check weight 100
+    server dc0app1_02 {{apserver2ip}}:{{snowport2}} cookie dc0app1_02 check weight 100
+    server dc0app1_03 {{apserver2ip}}:{{snowport3}} cookie dc0app1_03 check weight 100
+    server dc0app1_04 {{apserver2ip}}:{{snowport4}} cookie dc0app1_04 check weight 100
+    server dc0app1_05 {{apserver2ip}}:{{snowport5}} cookie dc0app1_05 check weight 100
+    server dc0app1_06 {{apserver2ip}}:{{snowport6}} cookie dc0app1_06 check weight 100
+
+    acl response-is-redirect res.hdr(Location) -m found
+    rspirep ^Location:\ http://(.*)   Location:\ \https://\1  if response-is-redirect
+#---------------------------------------------------------------------
+# admin stats listener for lb checking
+# DO NOT EXPOSE TO THE WORLD.
+#---------------------------------------------------------------------
+
+listen stats :{{listenstport}}
+    mode http
+    stats enable
+    stats hide-version
+    stats uri /

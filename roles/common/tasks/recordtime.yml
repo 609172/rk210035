@@ -1,0 +1,7 @@
+---
+ - name: recordtime
+   shell: echo "`date`\n"
+   register: cmd_out
+ - debug:
+       msg: Current time {{cmd_out.stdout}}
+

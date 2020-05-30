@@ -1,0 +1,7 @@
+---
+  - name: HA Proxy installation
+    include_role:
+        name: common
+        tasks_from: "{{item}}"
+    loop:
+      - recordtime

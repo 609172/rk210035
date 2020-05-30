@@ -1,0 +1,6 @@
+---
+  - name: Appserver playbook
+    hosts: localhost
+    roles:
+      - appserver
+      

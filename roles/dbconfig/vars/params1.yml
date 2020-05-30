@@ -1,0 +1,7 @@
+---
+dbparams:
+   innodb_io_capacity: 5000
+   innodb_open_files: 8000
+   key_buffer_size: 134217728
+   binlog_cache_size: 1048576
+   innodb_adaptive_flushing: 1

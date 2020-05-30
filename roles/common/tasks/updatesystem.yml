@@ -1,0 +1,12 @@
+---
+ - name: Run yum update 
+   yum:
+     name: *
+     update_cache: yes
+     update_only:  yes
+   become: true
+   become_user: root 
+   register: result
+ - debug:
+      msg: Installation status {{result.stdout}}
+
